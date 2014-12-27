@@ -2,6 +2,9 @@ package com.company;
 
 import java.util.Scanner;
 
+import static java.lang.Math.pow;
+
+
 public class Main {
 
     /**
@@ -20,47 +23,79 @@ public class Main {
      * @param args
      */
 
-    private int loanAmount = 0;
-    private int interestRate = 0;
-    private int loanTerm = 0;
+    private double loanAmount = 0;
+    private double interestRate = 0;
+    private double loanTerm = 0;
 
     public static void main(String[] args) {
-        int term = 0, interest = 0, loan = 0;
+        double term = 0, interest = 0, loan = 0;
 
         collectUI(loan, interest, term);
 
 
+
     }
 
-    private static void collectUI(int loan, int interest, int term) {
+    private static void collectUI(double loan, double interest, double term) {
 
         System.out.println("Loan Amount: ");
-        loan = scanInt();
+        loan = scanDouble();
         System.out.println("interest rate: ");
-        interest = scanInt();
+        interest = scanDouble();
         System.out.println("Loan Term: ");
-        term = scanInt();
+        term = scanDouble();
 
         Main main = new Main(loan, interest, term);
 
         System.out.println(main.getInterestRate());
         System.out.println(main.getLoanAmount());
         System.out.println(main.getLoanTerm());
+
+        main.mortgageCalculation();
+    }
+
+    private void mortgageCalculation() {
+
+
+        double P = getLoanAmount();
+        double N = (getLoanTerm() * 12);
+        double r = (getInterestRate() * 0.01 / 12);
+        double c = 0;
+        double pows;
+        //double pows2;
+        double top;
+        double bottom;
+        pows = pow((1+r), N);
+
+
+        top = P * r * pows;
+        bottom = pows - 1;
+
+        c = top / bottom;
+        System.out.println(pows);
+        //System.out.println(pows2);
+        System.out.println(top);
+        System.out.println(bottom);
+
+        System.out.println(P);
+        System.out.println(N);
+        System.out.println(r);
+        System.out.println(c);
     }
 
     /**
      * Method to scan next int
      *
      */
-    private static int scanInt() {
+    private static double scanDouble() {
         Scanner scan = new Scanner(System.in);
-        return scan.nextInt();
+        return scan.nextDouble();
     }
 
 
     //------------------Constructor----------------------------------
 
-    public Main(int loanAmount, int interestRate, int loanTerm) {
+    public Main(double loanAmount, double interestRate, double loanTerm) {
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;
         this.loanTerm = loanTerm;
@@ -70,7 +105,7 @@ public class Main {
 
     //---------------Getters and Setters-----------------------------
 
-    public int getLoanAmount() {
+    public double getLoanAmount() {
         return loanAmount;
     }
 
@@ -78,7 +113,7 @@ public class Main {
         this.loanAmount = loanAmount;
     }
 
-    public int getInterestRate() {
+    public double getInterestRate() {
         return interestRate;
     }
 
@@ -86,7 +121,7 @@ public class Main {
         this.interestRate = interestRate;
     }
 
-    public int getLoanTerm() {
+    public double getLoanTerm() {
         return loanTerm;
     }
 
