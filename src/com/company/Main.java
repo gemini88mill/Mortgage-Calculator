@@ -18,8 +18,56 @@ public class Main {
      * @param args
      */
 
+    private int loanAmount = 0;
+    private int interestRate = 0;
+    private int loanTerm = 0;
+
     public static void main(String[] args) {
 
-        System.out.println("hello world");
+       // System.out.println("hello world");
+
+
+
+
+        System.out.println("Please input your ");
     }
+
+
+    //------------------Constructor----------------------------------
+
+    public Main(int loanAmount, int interestRate, int loanTerm) {
+        this.loanAmount = loanAmount;
+        this.interestRate = interestRate;
+        this.loanTerm = loanTerm;
+    }
+
+    //---------------------------------------------------------------
+
+    //---------------Getters and Setters-----------------------------
+
+    public int getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(int loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
+    public int getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(int interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public int getLoanTerm() {
+        return loanTerm;
+    }
+
+    public void setLoanTerm(int loanTerm) {
+        this.loanTerm = loanTerm;
+    }
+
+    //--------------------------------------------------------------
 }
