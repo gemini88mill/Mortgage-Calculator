@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Main {
 
     /**
@@ -23,13 +25,36 @@ public class Main {
     private int loanTerm = 0;
 
     public static void main(String[] args) {
+        int term = 0, interest = 0, loan = 0;
 
-       // System.out.println("hello world");
+        collectUI(loan, interest, term);
 
 
+    }
 
+    private static void collectUI(int loan, int interest, int term) {
 
-        System.out.println("Please input your ");
+        System.out.println("Loan Amount: ");
+        loan = scanInt();
+        System.out.println("interest rate: ");
+        interest = scanInt();
+        System.out.println("Loan Term: ");
+        term = scanInt();
+
+        Main main = new Main(loan, interest, term);
+
+        System.out.println(main.getInterestRate());
+        System.out.println(main.getLoanAmount());
+        System.out.println(main.getLoanTerm());
+    }
+
+    /**
+     * Method to scan next int
+     *
+     */
+    private static int scanInt() {
+        Scanner scan = new Scanner(System.in);
+        return scan.nextInt();
     }
 
 
