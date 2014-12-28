@@ -34,6 +34,8 @@ public class Main {
     private double loanTerm = 0;
     private String startDate;
     private double monthlyPayment;
+    private String paymentFormatted;
+    private String loanFormatted;
 
     //------------------------------------------------------------------
 
@@ -59,21 +61,40 @@ public class Main {
 
         main.setMonthlyPayment(monthlyPayment);
 
-        main.cutoffDeci();
+        main.cutoffDeci(main.getMonthlyPayment());
+        main.cutoffLoan(main.getLoanAmount());
 
-        System.out.println("Interest Rate: "+ main.getInterestRate() + "%");
-        System.out.println("Loan Amount: $" + main.getLoanAmount());
-        System.out.println("Length of Loan Term: " + main.getLoanTerm() + " Months");
-        System.out.println("Monthly Payment: $" + main.getMonthlyPayment());
-        System.out.println("Payment Start Date: " + main.getStartDate());
+        main.printResult();
     }
 
-    private void cutoffDeci() {
+
+
+    private void printResult(){
+
+        System.out.println("Interest Rate: "+ getInterestRate() + "%");
+        System.out.println("Loan Amount: $" + getLoanFormatted());
+        System.out.println("Length of Loan Term: " + getLoanTerm() + " Months");
+        System.out.println("Monthly Payment: $" + getPaymentFormatted());
+        System.out.println("Payment Start Date: " + getStartDate());
+    }
+
+    //-------------Formatters--------------------------------------------
+
+    private void cutoffLoan(double loanAmount) {
         DecimalFormat df = new DecimalFormat("#.00");
-        String formatted = df.format(getMonthlyPayment());
+        String formatted = df.format(loanAmount);
 
-        System.out.println("formatted: " + formatted);
+        setLoanFormatted(formatted);
     }
+
+    private void cutoffDeci(double monthlyPayemnt) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String formatted = df.format(monthlyPayemnt);
+
+        setPaymentFormatted(formatted);
+    }
+
+    //------------------------------------------------------------------
 
     private double mortgageCalculation() {
 
@@ -167,6 +188,22 @@ public class Main {
 
     public void setMonthlyPayment(double monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
+    }
+
+    public String getPaymentFormatted() {
+        return paymentFormatted;
+    }
+
+    public void setPaymentFormatted(String paymentFormatted) {
+        this.paymentFormatted = paymentFormatted;
+    }
+
+    public String getLoanFormatted() {
+        return loanFormatted;
+    }
+
+    public void setLoanFormatted(String loanFormatted) {
+        this.loanFormatted = loanFormatted;
     }
 
     //--------------------------------------------------------------
