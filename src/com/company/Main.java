@@ -3,7 +3,9 @@ package com.company;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static java.lang.Math.pow;
 
@@ -36,6 +38,7 @@ public class Main {
     private double monthlyPayment;
     private String paymentFormatted;
     private String loanFormatted;
+    private String endDate;
 
     //------------------------------------------------------------------
 
@@ -64,9 +67,24 @@ public class Main {
         main.cutoffDeci(main.getMonthlyPayment());
         main.cutoffLoan(main.getLoanAmount());
 
+        main.calculateEndDate(main.getStartDate());
+
         main.printResult();
     }
 
+    private void calculateEndDate(String startDate) {
+        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
+        Date date = new Date();
+        Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("America/New_York"));
+
+        try {
+            format.parse(startDate);
+            
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     private void printResult(){
@@ -204,6 +222,14 @@ public class Main {
 
     public void setLoanFormatted(String loanFormatted) {
         this.loanFormatted = loanFormatted;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     //--------------------------------------------------------------
