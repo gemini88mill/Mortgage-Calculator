@@ -42,11 +42,25 @@ public class Main {
 
     //------------------------------------------------------------------
 
+    /**
+     * Start of the program, directly implements method collectUI()
+     * @param args
+     */
     public static void main(String[] args) {
         double term = 0, interest = 0, loan = 0;
         collectUI(loan, interest, term);
     }
 
+
+    /**
+     * collects user information for Mortgage calculator program.
+     * sends to main class then sends all nessesary information to
+     * respective methods, and finally prints the results of program
+     * in final method.
+     * @param loan
+     * @param interest
+     * @param term
+     */
     private static void collectUI(double loan, double interest, double term) {
 
         System.out.println("Loan Amount: ");
@@ -72,6 +86,18 @@ public class Main {
         main.printResult();
     }
 
+
+    /**
+     * requires String startDate
+     *
+     * turns defined string into a SimpleDateFormat Object and
+     * uses Calendar to calculate the length of the loan term as
+     * defined by loanTerm. adding how many years and applying it
+     * to date provided
+     *
+     *
+     * @param startDate
+     */
     private void calculateEndDate(String startDate) {
         SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
         Calendar calendar = Calendar.getInstance();
@@ -90,6 +116,10 @@ public class Main {
     }
 
 
+    /**
+     * programmer defined toString() style method that prints all variables
+     * and what they represent in simple UI formatting.
+     */
     private void printResult(){
 
         System.out.println("Interest Rate: "+ getInterestRate() + "%");
@@ -102,6 +132,11 @@ public class Main {
 
     //-------------Formatters--------------------------------------------
 
+
+    /**
+     * formatted decimal method for loanAmount $#.00
+     * @param loanAmount
+     */
     private void cutoffLoan(double loanAmount) {
         DecimalFormat df = new DecimalFormat("#.00");
         String formatted = df.format(loanAmount);
@@ -109,6 +144,10 @@ public class Main {
         setLoanFormatted(formatted);
     }
 
+    /**
+     * formatted decimal method for monthlyPayment $#.00
+     * @param monthlyPayemnt
+     */
     private void cutoffDeci(double monthlyPayemnt) {
         DecimalFormat df = new DecimalFormat("#.00");
         String formatted = df.format(monthlyPayemnt);
@@ -118,20 +157,21 @@ public class Main {
 
     //------------------------------------------------------------------
 
+
+    /**
+     * mortgageCalculation()
+     *
+     * calculates mortgage with defined variables in the global section
+     * @return
+     */
     private double mortgageCalculation() {
-
-
         double P = getLoanAmount();
         double N = (getLoanTerm() * 12);
         double r = (getInterestRate() * 0.01 / 12);
         double c = 0;
-        double pows;
-        //double pows2;
-        double top;
-        double bottom;
+        double pows, top, bottom;
+
         pows = pow((1+r), N);
-
-
         top = P * r * pows;
         bottom = pows - 1;
 
@@ -140,18 +180,23 @@ public class Main {
         return c;
     }
 
-    /**
-     * Method to scan next int
-     *
-     */
+
 
     //-------------Scanner Methods------------------------------------
 
+    /**
+     * Method to scan next double
+     *
+     */
     private static double scanDouble() {
         Scanner scan = new Scanner(System.in);
         return scan.nextDouble();
     }
 
+    /**
+     * Method to scan next Line and format to String
+     * @return
+     */
     private static String scanString() {
         Scanner scan = new Scanner(System.in);
         return scan.nextLine();
