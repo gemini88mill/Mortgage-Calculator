@@ -74,16 +74,19 @@ public class Main {
 
     private void calculateEndDate(String startDate) {
         SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
-        Date date = new Date();
-        Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("America/New_York"));
+        Calendar calendar = Calendar.getInstance();
 
         try {
-            format.parse(startDate);
-            
+            calendar.setTime(format.parse(startDate));
+            calendar.add(Calendar.YEAR, (int) getLoanTerm());
+
+            Date date = calendar.getTime();
+            setEndDate(format.format(date));
+
+            //System.out.println(calendar.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -94,6 +97,7 @@ public class Main {
         System.out.println("Length of Loan Term: " + getLoanTerm() + " Months");
         System.out.println("Monthly Payment: $" + getPaymentFormatted());
         System.out.println("Payment Start Date: " + getStartDate());
+        System.out.println("Payment End Date: " + getEndDate());
     }
 
     //-------------Formatters--------------------------------------------
