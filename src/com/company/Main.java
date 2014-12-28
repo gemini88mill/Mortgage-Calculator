@@ -1,5 +1,8 @@
 package com.company;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import static java.lang.Math.pow;
@@ -23,18 +26,20 @@ public class Main {
      * @param args
      */
 
+
+    //-------- Global Variables -----------------------------------------
+
     private double loanAmount = 0;
     private double interestRate = 0;
     private double loanTerm = 0;
     private String startDate;
+    private double monthlyPayment;
+
+    //------------------------------------------------------------------
 
     public static void main(String[] args) {
         double term = 0, interest = 0, loan = 0;
-
         collectUI(loan, interest, term);
-
-
-
     }
 
     private static void collectUI(double loan, double interest, double term) {
@@ -47,16 +52,27 @@ public class Main {
         term = scanDouble();
         System.out.println("Start Date: (MM/YYYY)");
 
-
         Main main = new Main(loan, interest, term);
 
-        /*System.out.println(main.getInterestRate());
-        System.out.println(main.getLoanAmount());
-        System.out.println(main.getLoanTerm());*/
-
+        main.setStartDate(scanString());
         double monthlyPayment = main.mortgageCalculation();
 
-        System.out.println("Monthly Payment: " + monthlyPayment);
+        main.setMonthlyPayment(monthlyPayment);
+
+        main.cutoffDeci();
+
+        System.out.println("Interest Rate: "+ main.getInterestRate() + "%");
+        System.out.println("Loan Amount: $" + main.getLoanAmount());
+        System.out.println("Length of Loan Term: " + main.getLoanTerm() + " Months");
+        System.out.println("Monthly Payment: $" + main.getMonthlyPayment());
+        System.out.println("Payment Start Date: " + main.getStartDate());
+    }
+
+    private void cutoffDeci() {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String formatted = df.format(getMonthlyPayment());
+
+        System.out.println("formatted: " + formatted);
     }
 
     private double mortgageCalculation() {
@@ -143,6 +159,14 @@ public class Main {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public double getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
+    public void setMonthlyPayment(double monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
     }
 
     //--------------------------------------------------------------
