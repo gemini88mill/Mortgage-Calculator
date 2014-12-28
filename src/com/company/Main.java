@@ -26,6 +26,7 @@ public class Main {
     private double loanAmount = 0;
     private double interestRate = 0;
     private double loanTerm = 0;
+    private String startDate;
 
     public static void main(String[] args) {
         double term = 0, interest = 0, loan = 0;
@@ -44,17 +45,21 @@ public class Main {
         interest = scanDouble();
         System.out.println("Loan Term: ");
         term = scanDouble();
+        System.out.println("Start Date: (MM/YYYY)");
+
 
         Main main = new Main(loan, interest, term);
 
-        System.out.println(main.getInterestRate());
+        /*System.out.println(main.getInterestRate());
         System.out.println(main.getLoanAmount());
-        System.out.println(main.getLoanTerm());
+        System.out.println(main.getLoanTerm());*/
 
-        main.mortgageCalculation();
+        double monthlyPayment = main.mortgageCalculation();
+
+        System.out.println("Monthly Payment: " + monthlyPayment);
     }
 
-    private void mortgageCalculation() {
+    private double mortgageCalculation() {
 
 
         double P = getLoanAmount();
@@ -72,25 +77,28 @@ public class Main {
         bottom = pows - 1;
 
         c = top / bottom;
-        System.out.println(pows);
-        //System.out.println(pows2);
-        System.out.println(top);
-        System.out.println(bottom);
 
-        System.out.println(P);
-        System.out.println(N);
-        System.out.println(r);
-        System.out.println(c);
+        return c;
     }
 
     /**
      * Method to scan next int
      *
      */
+
+    //-------------Scanner Methods------------------------------------
+
     private static double scanDouble() {
         Scanner scan = new Scanner(System.in);
         return scan.nextDouble();
     }
+
+    private static String scanString() {
+        Scanner scan = new Scanner(System.in);
+        return scan.nextLine();
+    }
+
+    //---------------------------------------------------------------
 
 
     //------------------Constructor----------------------------------
@@ -127,6 +135,14 @@ public class Main {
 
     public void setLoanTerm(int loanTerm) {
         this.loanTerm = loanTerm;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     //--------------------------------------------------------------
